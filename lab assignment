@@ -1,0 +1,1979 @@
+Lab exercise 
+Module 1 - Overview of IT industry
+Name = komal nafde
+
+LAB EXERCISE 1: Write a simple "Hello World" program in two different programming languages of
+your choice. Compare the structure and syntax
+Answer- 1. Hello World Program in Two Languages-
+
+(A) C Language
+#include <stdio.h>
+
+int main() {
+    printf("Hello, World!");
+    return 0;
+}
+
+(B) Python Language
+print("Hello, World!")
+
+2. Comparison of Structure and Syntax
+
+Feature	                                         C Language	                                     Python
+
+Type of Language	                            Compiled language	                           Interpreted language
+Program Structure                   	Requires main() function as entry point       	   No need for main function
+Header Files	                           Required (#include <stdio.h>)                        	Not required
+Syntax Complexity	                              More complex	                              Simple and readable
+Semicolon (;)	                           Mandatory at end of statements                       	Not required
+Curly Braces {}	                            Used to define blocks	                   Not used (indentation defines blocks)
+Output Statement	                             printf() function	                              print() function
+Compilation	                               Must be compiled before execution                    	Runs directly
+Code Length	                                     More lines of code	                           Fewer lines of code
+
+LAB EXERCISE 2: Research and create a diagram of how data is transmitted from a client to a server
+over the internet.
+Answer-
+1. Explanation-
+
+When data is transmitted from a client (like your browser) to a server (like a website), it follows the TCP/IP model. The process includes multiple steps:
+
+Step-by-Step Process
+
+DNS Resolution
+
+Client requests the IP address of the server (e.g., google.com).
+
+DNS server returns the IP address.
+
+Connection Establishment (TCP Handshake)
+
+Client → Server: SYN
+
+Server → Client: SYN-ACK
+
+Client → Server: ACK
+
+Connection is established.
+
+Data Preparation
+
+Data is created using protocols like HTTP/FTP.
+
+Example: HTTP request (GET/POST).
+
+Segmentation (Transport Layer)
+
+Data is broken into small packets (segments).
+
+Each packet gets sequence numbers.
+
+Routing (Internet Layer)
+
+IP adds source and destination addresses.
+
+Packets are routed through the internet.
+
+Transmission (Link Layer)
+
+Packets converted into signals (electrical, optical, or wireless).
+
+Sent through cables, Wi-Fi, etc.
+
+Reassembly at Server
+
+Server receives packets.
+
+TCP reorders and checks for errors.
+
+Data is reconstructed.
+
+Response Sent Back
+
+Server processes request and sends response (e.g., webpage).
+
+2. Diagram of Data Transmission
+
++-------------+        +-------------+        +-------------+
+|   Client    |        |   Internet  |        |   Server    |
+| (Browser)   |        | (Routers)   |        | (Web Server)|
++-------------+        +-------------+        +-------------+
+       |                      |                      |
+       | 1. DNS Request       |                      |
+       |--------------------->|                      |
+       |<---------------------|                      |
+       |                      |                      |
+       | 2. TCP Handshake     |                      |
+       |--------------------->|--------------------->|
+       |<---------------------|<---------------------|
+       |--------------------->|--------------------->|
+       |                      |                      |
+       | 3. HTTP Request      |                      |
+       |--------------------->|--------------------->|
+       |                      |                      |
+       |   (Packets Routed Through Internet)         |
+       |                      |                      |
+       |<---------------------|<---------------------|
+       | 4. HTTP Response     |                      |
+       |                      |                      |
+
+3. Layer-wise Flow (TCP/IP Model)
+Client Side                          Server Side
+-------------                       --------------
+Application Layer  ---> Data --->   Application Layer
+Transport Layer    ---> Segments -> Transport Layer
+Internet Layer     ---> Packets --> Internet Layer
+Link Layer         ---> Frames ---> Link Layer
+
+Lab exercise:3 Design a simple HTTP client-server communication in any language
+Answer-
+1. Introduction
+
+HTTP (HyperText Transfer Protocol) is used for communication between a client (browser/program) and a server.
+The client sends a request, and the server responds with data.
+
+2. Server Code (Python)
+from http.server import BaseHTTPRequestHandler, HTTPServer
+
+class MyHandler(BaseHTTPRequestHandler):
+    
+    def do_GET(self):
+        # Send response status code
+        self.send_response(200)
+        
+        # Send headers
+        self.send_header("Content-type", "text/html")
+        self.end_headers()
+        
+        # Send message to client
+        message = "Hello from Server!"
+        self.wfile.write(message.encode("utf-8"))
+
+# Server setup
+host = "localhost"
+port = 8080
+
+server = HTTPServer((host, port), MyHandler)
+print(f"Server running at http://{host}:{port}")
+
+server.serve_forever()
+3. Client Code (Python)
+import requests
+
+# Send GET request to server
+url = "http://localhost:8080"
+response = requests.get(url)
+
+# Print server response
+print("Response from server:")
+print(response.text)
+4. How It Works
+
+The server starts and listens on localhost:8080.
+
+The client sends an HTTP GET request to the server.
+
+The server processes the request using do_GET().
+
+The server sends back a response ("Hello from Server!").
+
+The client receives and prints the response.
+
+5. Output
+Server Terminal:
+Server running at http://localhost:8080
+Client Output:
+Response from server:
+Hello from Server!
+6. Simple Communication Diagram
+Client                          Server
+  |                                |
+  | ---- HTTP GET Request -------> |
+  |                                |
+  | <---- HTTP Response ---------- |
+  |                                |
+
+LAB EXERCISE 4: Research different types of internet connections (e.g., broadband, fiber, satellite)
+and list their pros and cons.
+Answer-
+1. Introduction
+
+Internet connections allow users to access online services. Different types of connections vary in speed, cost, reliability, and availability. The most common types include broadband, fiber, satellite, DSL, and mobile data.
+
+2. Types of Internet Connections
+(A) Broadband (Cable Internet)
+
+Description:
+Broadband uses cable TV lines to provide high-speed internet access.
+
+Pros:
+
+High speed compared to DSL
+
+Widely available in urban areas
+
+Supports streaming and gaming
+
+Cons:
+
+Speed may slow down during peak hours
+
+Shared bandwidth with neighbors
+
+Limited availability in rural areas
+
+(B) Fiber-Optic Internet
+
+Description:
+Fiber internet uses light signals through optical fibers, offering very high-speed connectivity.
+
+Pros:
+
+Extremely fast speeds (Gbps)
+
+Very reliable and stable
+
+Low latency (good for gaming and video calls)
+
+Cons:
+
+Expensive installation
+
+Limited availability in many regions
+
+Requires special infrastructure
+
+(C) DSL (Digital Subscriber Line)
+
+Description:
+DSL uses telephone lines to provide internet access.
+
+Pros:
+
+Affordable
+
+Widely available
+
+Does not tie up phone line
+
+Cons:
+
+Slower than broadband and fiber
+
+Speed depends on distance from provider
+
+Not suitable for heavy usage
+
+(D) Satellite Internet
+
+Description:
+Satellite internet uses satellites orbiting the Earth to provide connectivity.
+
+Pros:
+
+Available in remote and rural areas
+
+No need for cables or infrastructure
+
+Wide coverage
+
+Cons:
+
+High latency (delay)
+
+Expensive plans and equipment
+
+Affected by weather conditions
+
+(E) Mobile Data (3G/4G/5G)
+
+Description:
+Internet provided through cellular networks using SIM cards.
+
+Pros:
+
+Portable and wireless
+
+Easy to set up
+
+Available almost everywhere
+
+Cons:
+
+Limited data plans
+
+Speed varies with signal strength
+
+Can be expensive for heavy usage
+
+LAB EXERCISE 5: Simulate HTTP and FTP requests using command line tools (e.g., curl)
+Answer-
+🔹 1. Simulating HTTP Requests with curl
+
+✅ Basic GET request
+curl https://example.com
+Fetches the HTML content of the webpage.
+
+✅ GET request with headers
+curl -H "User-Agent: MyApp" https://example.com
+
+✅ POST request (sending data)
+curl -X POST -d "username=test&password=1234" https://example.com/login
+
+✅ POST JSON data
+curl -X POST -H "Content-Type: application/json" \
+-d '{"name":"John","age":30}' \
+https://example.com/api/users
+
+✅ PUT request
+curl -X PUT -d "name=updated" https://example.com/api/resource/1
+
+✅ DELETE request
+curl -X DELETE https://example.com/api/resource/1
+
+✅ Show response headers
+curl -I https://example.com
+
+✅ Verbose mode (debugging)
+curl -v https://example.com
+
+🔹 2. Simulating FTP Requests with curl
+
+✅ Download a file from FTP
+curl ftp://ftp.example.com/file.txt -o file.txt
+
+✅ Download with authentication
+curl ftp://username:password@ftp.example.com/file.txt -o file.txt
+
+✅ Upload a file to FTP
+curl -T upload.txt ftp://ftp.example.com/
+
+✅ Upload with authentication
+curl -T upload.txt ftp://username:password@ftp.example.com/
+
+✅ List directory contents
+curl ftp://ftp.example.com/
+
+LAB EXERCISE 6: Identify and explain three common application security vulnerabilities. Suggest
+possible solutions.
+Answer-
+1. SQL Injection (SQLi)
+Explanation
+
+SQL Injection occurs when an attacker inserts malicious SQL queries into input fields (like login forms) to manipulate the database. This can allow unauthorized access to sensitive data.
+
+Example
+
+Entering ' OR '1'='1 in a login field to bypass authentication.
+
+Solutions
+
+Use prepared statements (parameterized queries)
+
+Validate and sanitize user input
+
+Use ORM frameworks
+
+Limit database permissions
+
+2. Cross-Site Scripting (XSS)
+Explanation
+
+XSS happens when attackers inject malicious scripts into web pages viewed by other users. These scripts can steal cookies, session data, or redirect users to malicious sites.
+
+Types
+
+Stored XSS
+
+Reflected XSS
+
+DOM-based XSS
+
+Solutions
+
+Validate and sanitize user inputs
+
+Escape output before rendering
+
+Use Content Security Policy (CSP)
+
+Avoid inline JavaScript
+
+3. Cross-Site Request Forgery (CSRF)
+Explanation
+
+CSRF tricks users into performing unwanted actions on a web application where they are already authenticated (e.g., transferring money without their consent).
+
+Example
+
+A malicious link that triggers a bank transaction when clicked.
+
+Solutions
+
+Use CSRF tokens
+
+Implement same-site cookies
+
+Require re-authentication for sensitive actions
+
+Validate request origin
+
+LAB EXERCISE 7: Identify and classify 5 applications you use daily as either systemsoftware or
+application software.
+Answer-
+Introduction
+
+Software can be broadly classified into:
+
+System Software: Manages hardware and provides a platform for other software
+
+Application Software: Helps users perform specific tasks
+
+Examples of Daily Applications
+1. Windows
+
+Type: System Software
+
+Explanation: It manages hardware, memory, and system operations, and provides a platform for other applications.
+
+2. Android
+
+Type: System Software
+
+Explanation: Controls mobile device hardware and allows apps to run.
+
+3. WhatsApp
+
+Type: Application Software
+
+Explanation: Used for messaging, calling, and sharing media.
+
+4. Google Chrome
+
+Type: Application Software
+
+Explanation: Used to browse the internet and access websites.
+
+5. Instagram
+
+Type: Application Software
+
+Explanation: Used for sharing photos, videos, and social networking.
+
+LAB EXERCISE 8: Design a basic three-tiersoftware architecture diagram for a web application
+Answer-
+Three-Tier Architecture for a Web Application
+Diagram (Text Form)
++---------------------------+
+|   Presentation Layer      |
+| (Web Browser / UI)        |
+| - User Interface          |
++-------------+-------------+
+              |
+              v
++---------------------------+
+|   Application Layer       |
+| (Backend / Server)        |
+| - Business Logic          |
+| - Processing Requests     |
++-------------+-------------+
+              |
+              v
++---------------------------+
+|   Data Layer              |
+| (Database Server)         |
+| - Data Storage            |
+| - Data Management         |
++---------------------------+
+Explanation
+1. Presentation Layer
+
+User interacts with the system
+
+Example: Web pages, forms
+
+2. Application Layer
+
+Processes user requests
+
+Contains business logic
+
+3. Data Layer
+
+Stores and manages data
+
+Example: Database
+
+LAB EXERCISE 9: Create a case study on the functionality of the presentation, businesslogic, anddataaccess layers of a given software system.
+Answer-
+Case Study: Three-Tier Architecture in an Online Shopping System
+Introduction
+
+An online shopping system uses a three-tier architecture consisting of the presentation layer, business logic layer, and data access layer. Each layer has a specific role in handling user requests and managing data.
+
+1. Presentation Layer
+Functionality
+
+Acts as the user interface
+
+Allows users to interact with the system
+
+Features
+
+Displays products and categories
+
+Accepts user input (login, search, add to cart)
+
+Example
+
+Web pages opened in a browser like Google Chrome
+
+2. Business Logic Layer
+Functionality
+
+Processes user requests
+
+Applies rules and logic of the system
+
+Features
+
+Handles user authentication
+
+Processes orders and payments
+
+Manages cart operations
+
+Example
+
+Calculates total price
+
+Validates payment details
+
+3. Data Access Layer
+Functionality
+
+Interacts with the database
+
+Stores and retrieves data
+
+Features
+
+Saves user information
+
+Stores product details
+
+Maintains order history
+
+LAB EXERCISE 10: Explore different types of software environments (development, testing, production). Set up a basic environment in a virtual machine.
+Answer-
+Software environments are setups where applications are developed, tested, and deployed. The three main environments are development, testing, and production.
+
+1. Development Environment
+Purpose
+
+Used by developers to write and build code
+
+Features
+
+Frequent changes
+
+Debugging tools available
+
+Not stable
+
+Example Tools
+
+Visual Studio Code
+
+Compilers and local servers
+
+2. Testing Environment
+Purpose
+
+Used to test the application before release
+
+Features
+
+Similar to production
+
+Used by testers (QA team)
+
+Detects bugs and errors
+
+3. Production Environment
+Purpose
+
+Live environment used by real users
+
+Features
+
+Stable and secure
+
+High performance required
+
+No frequent changes
+
+Setting Up a Basic Environment in a Virtual Machine
+Step 1: Install Virtual Machine Software
+
+Install Oracle VirtualBox
+
+Step 2: Create a New Virtual Machine
+
+Choose OS (e.g., Linux or Windows)
+
+Allocate RAM and storage
+
+Step 3: Install Operating System
+
+Use ISO file to install OS inside VM
+
+Step 4: Install Required Software
+
+Install:
+
+Code editor (VS Code)
+
+Compiler (GCC)
+
+Browser
+
+Step 5: Set Up Development Environment
+
+Create project folder
+
+Write and run programs
+
+Step 6: Testing Setup
+
+Run test cases
+
+Debug errors
+
+Step 7: Simulate Production
+
+Run final version without debugging tools
+
+Ensure stability
+
+LAB EXERCISE 11: Create a list of software you use regularly and classify them into the followingcategories: system, application, and utility software.
+Answer-
+Introduction
+
+Software can be classified into system software, application software, and utility software based on their functions.
+
+1. System Software
+
+👉 Controls hardware and provides a platform for applications
+
+Examples
+
+Microsoft Windows
+
+Android
+
+2. Application Software
+
+👉 Used to perform specific tasks for users
+
+Examples
+
+Microsoft Word → Document creation
+
+Google Chrome → Internet browsing
+
+WhatsApp → Communication
+
+3. Utility Software
+
+👉 Helps maintain and optimize the system
+
+Examples
+
+Windows Defender → Security
+
+Disk Cleanup Tool → Removes unnecessary files
+
+Backup Software → Data backup
+
+LAB EXERCISE 12: Write a report on the various types of application software and how they improve productivity.
+Answer-
+Introduction
+
+Application software refers to programs designed to perform specific tasks for users. These applications help individuals and organizations complete work efficiently, saving time and effort.
+
+Types of Application Software
+1. Word Processing Software
+
+Used for creating and editing documents
+
+Features: formatting, spell check, templates
+
+Example: Microsoft Word
+
+👉 Productivity Improvement:
+
+Faster document creation
+
+Reduces errors with built-in tools
+
+2. Spreadsheet Software
+
+Used for calculations and data management
+
+Example: Microsoft Excel
+
+👉 Productivity Improvement:
+
+Automates calculations
+
+Helps analyze large data quickly
+
+3. Presentation Software
+
+Used to create slides and presentations
+
+Example: Microsoft PowerPoint
+
+👉 Productivity Improvement:
+
+Enhances communication
+
+Saves time in explaining ideas visually
+
+4. Web Browsers
+
+Used to access the internet and web applications
+
+Example: Google Chrome
+
+👉 Productivity Improvement:
+
+Quick access to information
+
+Supports online tools and research
+
+5. Communication Software
+
+Enables messaging, video calls, and collaboration
+
+Example: WhatsApp
+
+👉 Productivity Improvement:
+
+Faster communication
+
+Improves teamwork and coordination
+
+6. Multimedia Software
+
+Used for editing images, audio, and video
+
+👉 Productivity Improvement:
+
+Helps in content creation
+
+Useful in media and creative industries
+
+Overall Impact on Productivity
+
+Application software improves productivity by:
+
+Automating repetitive tasks
+
+Saving time and effort
+
+Increasing accuracy
+
+Enhancing communication and collaboration
+
+LAB EXERCISE 13: Create a flowchart representing the Software Development Life Cycle (SDLC).
+Answer-
+SDLC Flowchart
+Start
+  ↓
+Requirement Analysis
+  ↓
+Planning
+  ↓
+Design
+  ↓
+Implementation (Coding)
+  ↓
+Testing
+  ↓
+Deployment
+  ↓
+Maintenance
+  ↓
+End
+
+Explanation of Steps
+
+Requirement Analysis → Understand user needs
+
+Planning → Define timeline and resources
+
+Design → Create system structure
+
+Implementation → Write code
+
+Testing → Find and fix errors
+
+Deployment → Release software
+
+Maintenance → Update and improve
+
+LAB EXERCISE 14: Write a requirement specification for a simple library management system.
+Answer-
+1.1 Purpose
+
+The purpose of this system is to automate library operations such as managing books, issuing/returning books, and maintaining user records.
+
+1.2 Scope
+
+The system will:
+
+Manage book inventory
+
+Handle user registration
+
+Track issued and returned books
+
+Generate reports
+
+2. Overall Description
+2.1 System Overview
+
+The Library Management System will provide an easy way to manage library activities digitally instead of manually.
+
+2.2 Users
+
+Admin (Librarian)
+
+Members (Students/Staff)
+
+3. Functional Requirements
+3.1 User Management
+
+Add, update, delete users
+
+View user details
+
+3.2 Book Management
+
+Add new books
+
+Update and delete book records
+
+Search books by title, author, or ID
+
+3.3 Issue and Return System
+
+Issue books to users
+
+Record return of books
+
+Calculate fines for late returns
+
+3.4 Search Function
+
+Search books quickly using filters
+
+3.5 Reports
+
+List of available books
+
+List of issued books
+
+User activity reports
+
+4. Non-Functional Requirements
+4.1 Performance
+
+Fast response time
+
+4.2 Security
+
+Login authentication required
+
+Data protection
+
+4.3 Usability
+
+Simple and user-friendly interface
+
+4.4 Reliability
+
+System should work without errors and data loss
+
+5. System Requirements
+
+Computer with basic configuration
+
+Database system
+
+Web or desktop interface
+
+6. Constraints
+
+Limited to small/medium libraries
+
+Requires basic technical knowledge
+
+LAB EXERCISE 15: Perform a functional analysisfor an online shopping system.
+Answer-
+Introduction
+
+Functional analysis identifies the key functions and processes a system must perform. In an online shopping system, it defines how users interact with the system and how operations are handled.
+
+Main Functional Components
+1. User Management
+
+User registration (sign up)
+
+Login and logout
+
+Profile management
+
+2. Product Management
+
+Add, update, delete products (admin)
+
+View product details
+
+Categorize products
+
+3. Search and Browsing
+
+Search products by name, category, or price
+
+Filter and sort products
+
+4. Shopping Cart
+
+Add items to cart
+
+Remove items
+
+Update quantity
+
+View total price
+
+5. Order Processing
+
+Place orders
+
+Generate order ID
+
+View order history
+
+Cancel orders
+
+6. Payment System
+
+Select payment method (card, UPI, etc.)
+
+Process payments securely
+
+Generate invoice
+
+7. Delivery Management
+
+Enter shipping address
+
+Track order status
+
+8. Admin Functions
+
+Manage users and products
+
+View sales reports
+
+Monitor system activity
+
+9. Notification System
+
+Order confirmation messages
+
+Delivery updates
+
+LAB EXERCISE 16: Design a basic system architecture for a food delivery app.
+Answer-
+1. Overview
+
+A food delivery system connects customers, restaurants, and delivery agents through a centralized platform. It typically follows a client-server architecture with backend services and databases.
+
+2. High-Level Architecture Diagram (Textual)
+[ Customer App ]       [ Restaurant App ]       [ Delivery App ]
+        │                      │                       │
+        └─────────── API Gateway / Backend ───────────┘
+                              │
+        ┌───────────────┬───────────────┬───────────────┐
+        │               │               │               │
+ [ Auth Service ] [ Order Service ] [ Payment Service ] [ Tracking Service ]
+        │               │               │               │
+        └───────────────┴───────────────┴───────────────┘
+                              │
+                        [ Database ]
+                              │
+                      [ External Services ]
+         (Maps, Payment Gateway, Notifications)
+3. Main Components
+3.1 Client Applications
+
+Customer App (Mobile/Web)
+
+Browse restaurants
+
+Place orders
+
+Track delivery
+
+Restaurant App
+
+Accept/reject orders
+
+Update menu
+
+Manage inventory
+
+Delivery Agent App
+
+Receive delivery requests
+
+Navigation & tracking
+
+Update order status
+
+3.2 Backend (Server Side)
+a) API Gateway
+
+Entry point for all requests
+
+Handles routing, authentication, rate limiting
+
+b) Microservices
+
+Authentication Service
+
+User login/signup
+
+Token management (JWT)
+
+Order Service
+
+Create and manage orders
+
+Order status (placed, preparing, delivered)
+
+Payment Service
+
+Process online payments
+
+Handle refunds and transactions
+
+Restaurant Service
+
+Manage restaurant data and menus
+
+Delivery/Tracking Service
+
+Assign delivery agents
+
+Real-time GPS tracking
+
+Notification Service
+
+Sends SMS, push notifications, emails
+
+3.3 Database Layer
+
+Relational Database (e.g., MySQL/PostgreSQL)
+
+Users
+
+Orders
+
+Payments
+
+NoSQL Database (e.g., MongoDB)
+
+Real-time tracking data
+
+Logs
+
+Cache (Redis)
+
+Fast access (menus, location data)
+
+3.4 External Services
+
+Payment Gateway
+
+e.g., Razorpay, Stripe
+
+Maps & Location Services
+
+Google Maps API (for tracking & navigation)
+
+Cloud Storage
+
+Store images (menus, profiles)
+
+LAB EXERCISE 17: Create a DFD for a hospital management system
+Answer-
+A Data Flow Diagram (DFD) shows how data moves through a system, including:
+
+External entities
+
+Processes
+
+Data stores
+
+Data flows
+
+1. Level 0 DFD (Context Diagram)
+📌 Description
+
+This is the highest-level view showing the system as a single process.
+
+          [ Patient ]
+               │
+               ▼
+      ┌────────────────────┐
+      │ Hospital Management│
+      │      System        │
+      └────────────────────┘
+               ▲
+               │
+     ┌─────────┼─────────┐
+     │         │         │
+ [ Doctor ] [ Admin ] [ Pharmacy ]
+
+🧾 Data Flow:
+
+Patient → Registration details, appointment requests
+
+Doctor → Diagnosis, prescriptions
+
+Admin → Staff management, reports
+
+Pharmacy → Medicine details, billing
+
+Level 1 DFD (Detailed View)
+📌 Main Processes:
+
+Patient Registration
+
+Appointment Management
+
+Billing System
+
+Medical Records Management
+
+Pharmacy Management
+
+📊 Diagram (Textual Representation)
+[ Patient ]
+     │
+     ▼
+(1) Patient Registration ───► [ Patient Database ]
+     │
+     ▼
+(2) Appointment System ◄────► [ Doctor ]
+     │
+     ▼
+(3) Medical Records ───────► [ Records Database ]
+     │
+     ▼
+(4) Billing System ───────► [ Billing Database ]
+     │
+     ▼
+(5) Pharmacy System ◄────► [ Pharmacy Database ]
+
+Data Stores
+
+📁 Patient Database → Stores patient details
+
+📁 Records Database → Stores medical history
+
+📁 Billing Database → Stores payment records
+
+📁 Pharmacy Database → Stores medicine inventory
+
+External Entities
+
+Patient → Receives treatment and services
+
+Doctor → Provides diagnosis and prescriptions
+
+Admin → Manages system operations
+
+Pharmacy → Supplies medicines
+
+Level 2 DFD (Example: Patient Registration Process)
+[ Patient ]
+     │
+     ▼
+(1.1) Enter Details
+     │
+     ▼
+(1.2) Validate Data
+     │
+     ▼
+(1.3) Store Data ───► [ Patient Database ]
+     │
+     ▼
+ Confirmation to Patient
+
+Module 2 - Introduction to programming
+
+LAB EXERCISE 1:Research and provide three real-world applications where C programmingis
+extensively used, such as in embedded systems, operating systems, or gamedevelopment.
+Answer-
+C is one of the most widely used programming languages due to its efficiency, speed, and low-level hardware control. Below are three major real-world applications where C is extensively used.
+
+1. Embedded Systems
+📌 Description
+
+Embedded systems are specialized computing systems designed to perform specific tasks within devices.
+
+🔧 Where C is Used:
+
+Microcontrollers (Arduino, IoT devices)
+
+Automotive systems (engine control units)
+
+Medical devices (X-ray machines, glucose monitors)
+
+Consumer electronics (washing machines, TVs)
+
+💡 Why C is Used:
+
+Direct access to hardware
+
+Efficient memory usage
+
+High performance in resource-constrained environments
+
+📍 Real Example:
+
+Operating systems like Zephyr and ChibiOS/RT are written in C and are used in IoT and microcontroller-based systems.
+
+2. Operating Systems
+📌 Description
+
+Operating systems manage hardware and software resources of a computer.
+
+🖥️ Where C is Used:
+
+Kernel development
+
+Memory management
+
+Process scheduling
+
+💡 Why C is Used:
+
+Allows low-level system programming
+
+Efficient handling of system resources
+
+Portability across platforms
+
+📍 Real Example:
+
+Linux kernel
+
+UNIX
+
+Most operating systems are fully or partially written in C because it supports low-level operations like memory management and process control.
+
+3. Game Development
+📌 Description
+
+C is used in developing high-performance games and game engines.
+
+🎮 Where C is Used:
+
+Game engines
+
+Graphics rendering
+
+Real-time systems
+
+💡 Why C is Used:
+
+Fast execution speed
+
+Direct interaction with hardware (GPU, memory)
+
+Suitable for real-time applications
+
+📍 Real Example:
+
+The game development library raylib is written in C and used to build games and graphical applications.
+
+LAB EXERCISE 2:Write a C program that includes variables, constants, and comments. Declareand use different data types (int, char, float) and display their values.
+Answer- 
+💻 C Program Example
+#include <stdio.h>   // Preprocessor directive to include standard input-output library
+
+// Main function - execution starts here
+int main() {
+
+    // 🔹 Variable Declarations
+    int age = 20;            // Integer variable
+    float height = 5.8;      // Float variable
+    char grade = 'A';        // Character variable
+
+    // 🔹 Constant Declaration
+    const float PI = 3.14;   // Constant value (cannot be changed)
+
+    // 🔹 Displaying Values
+    printf("Displaying Values:\n");
+
+    printf("Age (int): %d\n", age);
+    printf("Height (float): %.2f\n", height);
+    printf("Grade (char): %c\n", grade);
+    printf("Value of PI (constant): %.2f\n", PI);
+
+    // 🔹 Single-line comment: End of program
+    /*
+       Multi-line comment:
+       This program demonstrates variables,
+       constants, and different data types in C
+    */
+
+    return 0;   // Indicates successful execution
+}
+
+🧾 Explanation
+🔹 Variables
+
+int age → stores integer value
+
+float height → stores decimal value
+
+char grade → stores single character
+
+🔹 Constant
+
+const float PI = 3.14;
+
+Value cannot be changed during program execution
+
+🔹 Comments
+
+// → Single-line comment
+
+/* ... */ → Multi-line comment
+
+🔹 Output Functions
+
+printf() is used to display values on the screen
+
+✅ Sample Output
+Displaying Values:
+Age (int): 20
+Height (float): 5.80
+Grade (char): A
+Value of PI (constant): 3.14
+
+LAB EXERCISE 3:Write a C program that accepts two integers from the user and performs
+arithmetic, relational, and logical operations on them. Display the results.
+Answer-
+💻 C Program: Operations on Two Integers
+#include <stdio.h>
+
+int main() {
+    int a, b;
+
+    // Taking input from user
+    printf("Enter first integer: ");
+    scanf("%d", &a);
+
+    printf("Enter second integer: ");
+    scanf("%d", &b);
+
+    // 🔹 Arithmetic Operations
+    printf("\n--- Arithmetic Operations ---\n");
+    printf("Addition (a + b) = %d\n", a + b);
+    printf("Subtraction (a - b) = %d\n", a - b);
+    printf("Multiplication (a * b) = %d\n", a * b);
+
+    if (b != 0)
+        printf("Division (a / b) = %d\n", a / b);
+    else
+        printf("Division not possible (division by zero)\n");
+
+    printf("Modulus (a %% b) = %d\n", b != 0 ? a % b : 0);
+
+    // 🔹 Relational Operations
+    printf("\n--- Relational Operations ---\n");
+    printf("a == b : %d\n", a == b);
+    printf("a != b : %d\n", a != b);
+    printf("a > b  : %d\n", a > b);
+    printf("a < b  : %d\n", a < b);
+    printf("a >= b : %d\n", a >= b);
+    printf("a <= b : %d\n", a <= b);
+
+    // 🔹 Logical Operations
+    printf("\n--- Logical Operations ---\n");
+    printf("(a > 0 && b > 0) : %d\n", (a > 0 && b > 0));
+    printf("(a > 0 || b > 0) : %d\n", (a > 0 || b > 0));
+    printf("!(a > 0)         : %d\n", !(a > 0));
+
+    return 0;
+}
+🧾 Explanation
+🔹 Arithmetic Operations
+
++ → Addition
+
+- → Subtraction
+
+* → Multiplication
+
+/ → Division
+
+% → Modulus (remainder)
+
+🔹 Relational Operations
+
+(Returns 1 = true, 0 = false)
+
+== Equal
+
+!= Not equal
+
+> Greater than
+
+< Less than
+
+>= Greater than or equal
+
+<= Less than or equal
+
+🔹 Logical Operations
+
+&& → AND
+
+|| → OR
+
+! → NOT
+
+✅ Sample Output
+Enter first integer: 10
+Enter second integer: 5
+
+--- Arithmetic Operations ---
+Addition (a + b) = 15
+Subtraction (a - b) = 5
+Multiplication (a * b) = 50
+Division (a / b) = 2
+Modulus (a % b) = 0
+
+--- Relational Operations ---
+a == b : 0
+a != b : 1
+a > b  : 1
+a < b  : 0
+a >= b : 1
+a <= b : 0
+
+--- Logical Operations ---
+(a > 0 && b > 0) : 1
+(a > 0 || b > 0) : 1
+!(a > 0)         : 0
+
+Lab EXERCISE 4:Write a C program to check if a number is even or odd using an if-else
+statement. Extend the program using a switch statement to display the monthname based on the user’s input (1 for January, 2 for February, etc.).
+Answer-
+💻 C Program: Even/Odd Check + Month Name (Switch)
+#include <stdio.h>
+
+int main() {
+    int num, month;
+
+    // 🔹 Even or Odd Check
+    printf("Enter a number: ");
+    scanf("%d", &num);
+
+    if (num % 2 == 0) {
+        printf("The number %d is EVEN.\n", num);
+    } else {
+        printf("The number %d is ODD.\n", num);
+    }
+
+    // 🔹 Month Name using Switch
+    printf("\nEnter month number (1-12): ");
+    scanf("%d", &month);
+
+    printf("Month: ");
+    switch(month) {
+        case 1: printf("January"); break;
+        case 2: printf("February"); break;
+        case 3: printf("March"); break;
+        case 4: printf("April"); break;
+        case 5: printf("May"); break;
+        case 6: printf("June"); break;
+        case 7: printf("July"); break;
+        case 8: printf("August"); break;
+        case 9: printf("September"); break;
+        case 10: printf("October"); break;
+        case 11: printf("November"); break;
+        case 12: printf("December"); break;
+        default: printf("Invalid month number!");
+    }
+
+    return 0;
+}
+🧾 Explanation
+🔹 Even/Odd Logic
+
+Uses % (modulus operator)
+
+If num % 2 == 0 → Even
+
+Else → Odd
+
+🔹 Switch Statement
+
+Takes input from 1 to 12
+
+Matches case values to display month names
+
+default handles invalid input
+
+✅ Sample Output
+Enter a number: 7
+The number 7 is ODD.
+
+Enter month number (1-12): 3
+Month: March
+
+LAB EXERCISE 5:Write a C program to print numbers from 1 to 10 using all three types of loops(while, for, do-while).
+Answer-
+C Program: Printing 1 to 10 Using Loops
+#include <stdio.h>
+
+int main() {
+
+    // 🔹 Using WHILE loop
+    int i = 1;
+    printf("Using WHILE loop:\n");
+    while (i <= 10) {
+        printf("%d ", i);
+        i++;
+    }
+
+    // 🔹 Using FOR loop
+    int j;
+    printf("\n\nUsing FOR loop:\n");
+    for (j = 1; j <= 10; j++) {
+        printf("%d ", j);
+    }
+
+    // 🔹 Using DO-WHILE loop
+    int k = 1;
+    printf("\n\nUsing DO-WHILE loop:\n");
+    do {
+        printf("%d ", k);
+        k++;
+    } while (k <= 10);
+
+    return 0;
+}
+
+🧾 Explanation
+🔹 While Loop
+
+Checks condition first, then executes
+
+Runs while i <= 10
+
+🔹 For Loop
+
+Combines initialization, condition, and increment in one line
+
+Best for known number of iterations
+
+🔹 Do-While Loop
+
+Executes at least once, then checks condition
+
+Condition is checked after execution
+
+✅ Sample Output
+Using WHILE loop:
+1 2 3 4 5 6 7 8 9 10
+
+Using FOR loop:
+1 2 3 4 5 6 7 8 9 10
+
+Using DO-WHILE loop:
+1 2 3 4 5 6 7 8 9 10
+
+LAB EXERCISE 6:Write a C program that uses the break statement to stop printing numbers whenit reaches 5. Modify the program to skip printing the number 3 using the
+continue statement.
+Answer-
+C Program: Using break and continue
+#include <stdio.h>
+
+int main() {
+
+    int i;
+
+    // 🔹 Using BREAK statement
+    printf("Using break (stop at 5):\n");
+    for (i = 1; i <= 10; i++) {
+        if (i == 5) {
+            break;   // Stops the loop when i becomes 5
+        }
+        printf("%d ", i);
+    }
+
+    // 🔹 Using CONTINUE statement
+    printf("\n\nUsing continue (skip 3):\n");
+    for (i = 1; i <= 10; i++) {
+        if (i == 3) {
+            continue;   // Skips printing when i is 3
+        }
+        printf("%d ", i);
+    }
+
+    return 0;
+}
+🧾 Explanation
+🔹 Break Statement
+
+Immediately terminates the loop
+
+When i == 5, loop stops completely
+
+Output will print only up to 4
+
+🔹 Continue Statement
+
+Skips the current iteration
+
+When i == 3, it does not print 3, but continues the loop
+
+✅ Sample Output
+Using break (stop at 5):
+1 2 3 4 
+
+Using continue (skip 3):
+1 2 4 5 6 7 8 9 10
+
+LAB EXERCISE 7:Write a C program that calculates the factorial of a number using a function Include function declaration, definition, and call.
+Answer-
+#include <stdio.h>
+
+// Function Declaration
+int factorial(int n);
+
+int main() {
+    int num, result;
+
+    printf("Enter a number: ");
+    scanf("%d", &num);
+
+    // Function Call
+    result = factorial(num);
+
+    printf("Factorial of %d = %d\n", num, result);
+
+    return 0;
+}
+
+// Function Definition
+int factorial(int n) {
+    int i, fact = 1;
+
+    for(i = 1; i <= n; i++) {
+        fact = fact * i;
+    }
+return fact;
+}
+
+Explanation:
+
+Function Declaration: int factorial(int n); tells the compiler about the function.
+
+Function Call: factorial(num); is used inside main() to compute the result.
+
+Function Definition: Contains the logic to calculate factorial using a loop.
+
+Example:
+
+If you input 5, the output will be:
+
+Factorial of 5 = 120
+
+LAB EXERCISE  8:Write a C program that stores 5 integers in a one-dimensional array and prints
+Answer-
+#include <stdio.h>
+
+int main() {
+    int arr[5];
+    int i;
+
+    // Input 5 integers
+    printf("Enter 5 integers:\n");
+    for(i = 0; i < 5; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    // Print the integers
+    printf("The entered integers are:\n");
+    for(i = 0; i < 5; i++) {
+        printf("%d ", arr[i]);
+    }
+
+    return 0;
+}
+
+Explanation:
+
+int arr[5]; → Declares an array to store 5 integers
+
+First for loop → Takes input from the user
+
+Second for loop → Prints the stored values
+
+Example Output:
+Enter 5 integers:
+1 2 3 4 5
+The entered integers are:
+1 2 3 4 5
+
+
+
+LAB EXERCISE 9:Write a C program to demonstrate pointer usage. Use a pointer to modifythevalue of a variable and print the result.
+Answer-
+Aim:
+
+To write a C program that demonstrates the use of pointers by modifying the value of a variable using a pointer.
+
+Theory:
+
+A pointer is a variable that stores the address of another variable. Using pointers, we can directly access and modify the value stored at a memory location. The * operator is used to access the value stored at the address, while the & operator is used to get the address of a variable.
+
+Program:
+#include <stdio.h>
+
+int main() {
+    int num = 10;
+    int *ptr;
+
+    // Assign address of num to pointer
+    ptr = &num;
+
+    printf("Before modification:\n");
+    printf("Value of num = %d\n", num);
+
+    // Modify value using pointer
+    *ptr = 25;
+
+    printf("After modification using pointer:\n");
+    printf("Value of num = %d\n", num);
+
+    return 0;
+}
+
+Output:
+Before modification:
+Value of num = 10
+After modification using pointer:
+Value of num = 25
+
+LAB EXERCISE 10:Write a C program that takes two strings from the user and concatenates themusing strcat(). Display the concatenated string and its length using
+strlen().
+Answer-
+Aim:
+
+To write a C program that takes two strings from the user, concatenates them using strcat(), and finds the length of the resulting string using strlen().
+
+Theory:
+
+strcat() is a function from the <string.h> library used to concatenate (join) two strings.
+
+strlen() is used to calculate the length of a string (number of characters excluding the null character \0).
+
+Program:
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str1[100], str2[100];
+
+    // Input strings
+    printf("Enter first string: ");
+    gets(str1);
+
+    printf("Enter second string: ");
+    gets(str2);
+
+    // Concatenate strings
+    strcat(str1, str2);
+
+    // Display concatenated string
+    printf("Concatenated string: %s\n", str1);
+
+    // Display length of concatenated string
+    printf("Length of concatenated string: %lu\n", strlen(str1));
+
+    return 0;
+}
+
+Output:
+Enter first string: Hello
+Enter second string: World
+Concatenated string: HelloWorld
+Length of concatenated string: 10
+
+LAB EXERCISE 11:Write a C program that defines a structure to store a student's details (name, roll number, and marks). Use an array of structures to store details of 3students and print them.
+Answer-
+Aim:
+To write a C program that defines a structure to store student details (name, roll number, and marks), store details of 3 students using an array of structures, and display them.
+
+Theory:
+
+A structure in C is a user-defined data type that allows grouping of different types of variables under one name. An array of structures is used to store multiple records of the same type, such as details of multiple students.
+
+Program:
+#include <stdio.h>
+
+struct Student {
+    char name[50];
+    int roll;
+    float marks;
+};
+
+int main() {
+    struct Student s[3];
+    int i;
+
+    // Input details
+    for(i = 0; i < 3; i++) {
+        printf("Enter details of student %d:\n", i + 1);
+
+        printf("Name: ");
+        scanf("%s", s[i].name);
+
+        printf("Roll Number: ");
+        scanf("%d", &s[i].roll);
+
+        printf("Marks: ");
+        scanf("%f", &s[i].marks);
+    }
+
+    // Display details
+    printf("\nStudent Details:\n");
+    for(i = 0; i < 3; i++) {
+        printf("\nStudent %d\n", i + 1);
+        printf("Name: %s\n", s[i].name);
+        printf("Roll Number: %d\n", s[i].roll);
+        printf("Marks: %.2f\n", s[i].marks);
+    }
+
+    return 0;
+}
+Output (Example):
+Enter details of student 1:
+Name: Ram
+Roll Number: 1
+Marks: 85
+
+Enter details of student 2:
+Name: Shyam
+Roll Number: 2
+Marks: 90
+
+Enter details of student 3:
+Name: Mohan
+Roll Number: 3
+Marks: 88
+
+Student Details:
+
+Student 1
+Name: Ram
+Roll Number: 1
+Marks: 85.00
+
+Student 2
+Name: Shyam
+Roll Number: 2
+Marks: 90.00
+
+Student 3
+Name: Mohan
+Roll Number: 3
+Marks: 88.00
+
+LAB EXERCISE 12:Write a C program to create a file, write a string into it, close the file, thenopen the file again to read and display its contents.
+Answer-
+Aim:
+
+To write a C program that creates a file, writes a string into it, closes the file, and then reopens it to read and display its contents.
+
+Theory:
+
+File handling in C is done using file pointers (FILE *) and functions provided in the <stdio.h> library.
+
+fopen() is used to open or create a file.
+
+fprintf() is used to write data into a file.
+
+fclose() is used to close the file.
+
+fgets() is used to read data from a file.
+
+Program:
+#include <stdio.h>
+
+int main() {
+    FILE *fp;
+    char str[100];
+
+    // Create and write to file
+    fp = fopen("example.txt", "w");
+
+    if (fp == NULL) {
+        printf("Error opening file!\n");
+        return 1;
+    }
+
+    printf("Enter a string: ");
+    fgets(str, sizeof(str), stdin);
+
+    fprintf(fp, "%s", str);
+    fclose(fp);
+
+    // Open file for reading
+    fp = fopen("example.txt", "r");
+
+    if (fp == NULL) {
+        printf("Error opening file!\n");
+        return 1;
+    }
+
+    printf("\nContents of the file:\n");
+
+    while (fgets(str, sizeof(str), fp) != NULL) {
+        printf("%s", str);
+    }
+
+    fclose(fp);
+
+    return 0;
+}
+Output (Example):
+Enter a string: Hello File Handling
+
+Contents of the file:
+Hello File Handling
